@@ -1,9 +1,4 @@
-import math
-import statistics
-import datetime
 import secrets 
-import abc
-import pytest
 
 def verify_signature(master_sign, input_sign, threshold=0.05):
     if not len(master_sign)==len(input_sign):
@@ -38,7 +33,7 @@ class Satellite:
             return string
         
         self.__used_nonces.append(command_obj.nonce)
-        
+
         if verify_signature(self.__secret_key, command_obj.signature):
             self.is_unlocked=True
             string="Access granted"
@@ -75,8 +70,7 @@ def main():
         return 
 
     command = Command("Unlock", signature_list, generate_nonce())
-    result=my_sat.authenticate(command)
-    print(f"Satellite response: {result}")
+    print(f"Satellite response: {my_sat.authenticate(command)}")
 
 if __name__ == "__main__":
     main()
