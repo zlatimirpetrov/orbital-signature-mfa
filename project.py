@@ -44,3 +44,37 @@ class Satellite:
         else:
             string="Access denied"
             return string
+        
+def parse_input(user_string):
+    parsed_input=user_string.split(",")
+    clean_floats = []
+    try:
+        for string in parsed_input:
+            clean_floats.append(float(string.strip()))
+        return clean_floats
+    except ValueError:
+        return None
+
+def generate_nonce():
+    return secrets.token_hex(16)
+
+def main():
+    master_pattern=[1.0, 5.0, 2.5] #secret key
+    my_sat=Satellite(master_pattern)
+
+    print("Orbital Signature MFA System")
+    print(f"Master Pattern required: {len(master_pattern)} bursts")
+
+    user_txt=input("Enter kinetic signature in format (1.1, 2.4, 0.6): ")
+    signature_list=parse_input(user_txt)
+
+    if signature_list is None:
+        print("Invalid input! Please use numbers separated by (,) commas.")
+        return 
+
+    command = Command("Unlock", signature_list, generate_nonce())
+    result=my_sat.authenticate(command)
+    print(f"Satellite response: {result}")
+
+if __name__ == "__main__":
+    main()
