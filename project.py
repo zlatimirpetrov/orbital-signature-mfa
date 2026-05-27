@@ -36,7 +36,8 @@ class Satellite:
         if command_obj.nonce in self.__used_nonces:
             string="Detected replay attack!"
             return string
-        self.__used_nonces.append(command_obj.nonce)
+        else:
+            self.__used_nonces.append(command_obj.nonce)
         if verify_signature(self.__secret_key, command_obj.signature):
             self.is_unlocked=True
             string="Access granted"
