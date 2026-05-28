@@ -1,5 +1,7 @@
 # Orbital MFA: Kinetic satellite authorization
 
+#### Video Demo:  <https://www.youtube.com/watch?v=_4tdp4tptqU&t=4s>
+
 ### What is this?
 This project is a simulation of a secure ground-to-space authentication system. Most systems rely on static passwords that are easy to intercept. This project uses a Kinetic Signature a sequence of values representing things like signal burst timing or pressure, that must match a master key stored on the satellite.
 
